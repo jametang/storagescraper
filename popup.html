@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Storage Scraper</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2" y="3" width="20" height="18" rx="3" fill="currentColor" opacity="0.15"/>
+        <path d="M5 8h14M5 12h14M5 16h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <h1>Storage Scraper</h1>
+        <p id="origin" class="origin">—</p>
+      </div>
+    </div>
+    <button id="btnRefresh" class="icon-btn" title="刷新" aria-label="刷新">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M17.65 6.35A7.95 7.95 0 0 0 12 4V1L7 6l5 5V7c2.76 0 5 2.24 5 5a5 5 0 0 1-8.9 3.1L6.7 16.5A7 7 0 0 0 19 12c0-1.94-.78-3.7-2.05-4.95zM6 12c0-1.48.65-2.8 1.67-3.71L9.1 6.9A5 5 0 0 0 7 12a5 5 0 0 0 8.9 3.1l1.4 1.4A7 7 0 0 1 5 12z"/></svg>
+    </button>
+  </header>
+
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" width="14" height="14"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      <input id="search" type="search" placeholder="搜索 key / value，如 session、token…" autocomplete="off" />
+      <button id="btnClearSearch" class="clear-btn" title="清除" hidden>×</button>
+    </div>
+    <label class="hot-filter" title="仅显示可能与登录相关的键">
+      <input type="checkbox" id="hotOnly" />
+      <span>登录相关</span>
+    </label>
+  </div>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="all" role="tab">全部 <span class="count" id="countAll">0</span></button>
+    <button class="tab" data-tab="localStorage" role="tab">Local <span class="count" id="countLocal">0</span></button>
+    <button class="tab" data-tab="sessionStorage" role="tab">Session <span class="count" id="countSession">0</span></button>
+    <button class="tab" data-tab="cookies" role="tab">Cookies <span class="count" id="countCookies">0</span></button>
+    <button class="tab" data-tab="indexedDB" role="tab">IDB <span class="count" id="countIdb">0</span></button>
+  </nav>
+
+  <div id="status" class="status" hidden></div>
+
+  <main id="list" class="list" role="tree"></main>
+
+  <footer class="footer">
+    <span id="summary">加载中…</span>
+    <button id="btnCopyAll" class="text-btn" type="button">复制全部 JSON</button>
+  </footer>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
